@@ -18,5 +18,5 @@ Caso queira rodar utilizando a base do Azure, deve-se mudar a connectionString c
 ```
 <add name="VideoLocadora" providerName="System.Data.SqlClient" connectionString="Server=tcp:pubazure.database.windows.net,1433;Initial Catalog=VideoLocadora;Persist Security Info=False;User ID=pubazure;Password=senha;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" />
 ```
-Execute o projeto no Visual Studio e utilize a aplicação.
+Execute o Clean Solution e depois o Build Solution no projeto e utilize a aplicação.
 
