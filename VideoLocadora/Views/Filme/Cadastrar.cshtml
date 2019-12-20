@@ -1,0 +1,69 @@
+﻿
+@model Modelo.Filme
+@{
+    ViewBag.Title = "Cadastro de Filme";
+}
+
+@if (TempData["Mensagem"] != null)
+{   <br /><br />
+
+    <div class="alert alert-warning" style="padding: 10px !important;">
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        @TempData["Mensagem"]
+    </div>
+}
+
+@using (Html.BeginForm("Cadastrar", "Filme"))
+{
+    <br /><br />
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4>Cadastro Filmes</h4>
+        </div>
+        <div class="panel-body">
+            <div hidden>
+                @Html.LabelFor(model => model.Id)
+                @Html.TextBoxFor(model => model.Id)
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control", @maxlength = "50" } })
+                    @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label for="DtaCriacao">Data de criação</label>
+                    @Html.EditorFor(model => model.DtaCriacao, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DtaCriacao, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12" style="align-content:center">
+                    @Html.LabelFor(model => model.Ativo)
+                    @Html.CheckBoxFor(model => model.Ativo, new { @class = "checkbox" })
+                </div>
+            </div>
+            <div>
+                @Html.LabelFor(model => model.Genero, htmlAttributes: new { @class = "control-label" })
+                @{
+                    if (ViewBag.IdGenero != null)
+                    {
+                        @Html.DropDownList("IdGenero", (IEnumerable<SelectListItem>)ViewBag.IdGenero, null, new { @class = "form-control" })
+                    }
+                }
+
+                @Html.ValidationMessageFor(model => model.IdGenero, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="panel-footer">
+            <input type="submit" value="Cadastrar" class="btn btn-danger">
+            <input type="submit" value="Voltar" class="btn btn-primary" onClick="javascript: history.back(-1);">
+        </div>
+    </div>
+}
+@section scripts {
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}

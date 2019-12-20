@@ -1,0 +1,62 @@
+﻿
+@model Modelo.Filme
+@{
+    ViewBag.Title = "Alterar Filme";
+}
+@using (Html.BeginForm("Alterar", "Filme"))
+{
+    @Html.AntiForgeryToken()
+    <br /><br />
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4>Alterar Filme</h4>
+        </div>
+        <div class="panel-body">
+            <div hidden>
+                @Html.LabelFor(model => model.Id)
+                @Html.TextBoxFor(model => model.Id)
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control", @maxlength = "50" } })
+                    @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label for="DtaCriacao">Data de criação</label>
+
+                    @if (ViewBag.dtCriacao != null)
+                    {
+                        @Html.EditorFor(model => model.DtaCriacao, new { htmlAttributes = new { @class = "form-control" }, @Value = ViewBag.dtCriacao.ToString("yyyy-MM-dd") })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.DtaCriacao, new { htmlAttributes = new { @class = "form-control" } })
+                    }
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12" style="align-content:center">
+                    @Html.LabelFor(model => model.Ativo)
+                    @Html.CheckBoxFor(model => model.Ativo, new { @class = "checkbox" })
+                </div>
+            </div>
+            <div>
+                @Html.LabelFor(model => model.IdGenero, htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownList("IdGenero", (SelectList)ViewBag.Id, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IdGenero)
+            </div>
+        </div>
+        <div class="panel-footer">
+            <input type="submit" value="Alterar" class="btn btn-danger">
+            <input type="submit" value="Voltar" class="btn btn-primary" onClick="javascript: history.back(-1);">
+        </div>
+    </div>
+}
+@section scripts {
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}

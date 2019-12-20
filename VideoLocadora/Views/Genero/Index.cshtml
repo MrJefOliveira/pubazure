@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Modelo.Genero>
+@{
+    ViewBag.Title = "Gênero";
+}
+
+@if (TempData["Mensagem"] != null)
+{
+    <br /><br />
+    <div class="alert alert-warning" style="padding: 10px !important;">
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        @TempData["Mensagem"]
+    </div>
+}
+
+@using (Html.BeginForm("Excluir", "Genero", FormMethod.Get))
+{
+    <br /><br />
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4>Cadastro Gêneros</h4>
+        </div>
+        <div class="panel-body">
+            @Html.ValidationSummary(true)
+            <table class="table">
+                <tbody>
+                    <tr>
+                    <tr>
+                        <th>
+                            <label>Nome</label>
+                        </th>
+                        <th>
+                            <label>Data de criação</label>
+                        </th>
+                        <th>
+                            <label>Ativo</label>
+                        </th>
+                        <th>
+                            <label>Alterar</label>
+                        </th>
+                        <th>
+                            <label>Excluir</label>
+                        </th>
+                    </tr>
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <label for="@item.Nome">@item.Nome </label>
+                                </td>
+                                <td>
+                                    <label for="@item.Nome">@String.Format("{0:dd/MM/yyyy}", @item.DtaCriacao)</label>
+                                </td>
+                                <td>
+                                    @if (item.Ativo == true)
+                                    {
+                                        <label> Sim </label>}
+                                    else
+                                    {
+                                        <label> Não </label>}
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Alterar", "Alterar", "Genero", new { @Id = item.Id }, null)
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="Id" value="@item.Id" id="@item.Id" />
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="panel-footer">
+            @Html.ActionLink("Cadastrar", "Cadastrar", "Genero", new { @class = "btn btn-danger" })
+            <input type="submit" value="Excluir" class="btn btn-primary" />
+        </div>
+    </div>
+}
+@section scripts {
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}

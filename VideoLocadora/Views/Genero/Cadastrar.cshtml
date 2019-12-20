@@ -1,0 +1,55 @@
+﻿@model Modelo.Genero
+@{
+    ViewBag.Title = "Cadastro Gênero";
+}
+@using (Html.BeginForm("Cadastrar", "Genero"))
+{
+    @Html.AntiForgeryToken()
+    <br /><br />
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4>Cadastro Gênero</h4>
+        </div>
+        <div class="panel-body">
+            <div hidden>
+                @Html.LabelFor(model => model.Id)
+                @Html.TextBoxFor(model => model.Id)
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control", @maxlength = "20" } })
+                    @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    @Html.EditorFor(model => model.DtaCriacao, new { htmlAttributes = new { @class = "form-control" } })
+
+                    @*@if (ViewBag.dtCriacao != null)
+                    {
+                        @Html.EditorFor(model => model.DtaCriacao, new { htmlAttributes = new { @class = "form-control" }, @Value = ViewBag.dtCriacao.ToString("yyyy-MM-dd") })
+                    }*@
+
+
+                    @Html.ValidationMessageFor(model => model.DtaCriacao, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12" style="padding-left:20px">
+                    @Html.LabelFor(model => model.Ativo)
+                    @Html.CheckBoxFor(model => model.Ativo, new { @class = "checkbox" })
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <input type="submit" value="Cadastrar" class="btn btn-danger">
+        </div>
+    </div>
+}
+@section scripts {
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}
+
+

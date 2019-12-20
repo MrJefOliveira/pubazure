@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body>
+    <container>
+        <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #120a8f;" >
+            <div class="container-fluid" style="margin: 11px">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <ul class="nav navbar-nav navbar-right">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @Html.ActionLink("Gênero", "Index", "Genero", new { area = "" }, new { @class = "navbar-brand" })
+                            @Html.ActionLink("Filme", "Index", "Filme", new { area = "" }, new { @class = "navbar-brand" })
+                            @Html.ActionLink("Locação", "Index", "Locacao", new { area = "" }, new { @class = "navbar-brand" })
+                        }
+                    </ul>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">@User.Identity.Name<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Sair", "Logout", "Login")</li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("Login", "Login", "Login", new { area = "" }, new { @class = "navbar-brand" })</li>
+                            <li>@Html.ActionLink("Cadastre-se", "CadastroUsuario", "Login", new { area = "" }, new { @class = "navbar-brand" })</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </container>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    @RenderSection("scripts", false)
+</body>
+</html>

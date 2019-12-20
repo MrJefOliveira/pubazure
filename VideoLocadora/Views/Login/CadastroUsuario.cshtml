@@ -1,0 +1,54 @@
+﻿@model Modelo.UsuarioViewModel
+@{
+    ViewBag.Title = "Cadastro Usuario";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <br /><br />
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4>Cadastrar usuário</h4>
+        </div>
+
+        <div class="panel-body">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control", @maxlength = "100" } })
+                    @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Login, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.Login, new { htmlAttributes = new { @class = "form-control", @maxlength = "30" } })
+                    @Html.ValidationMessageFor(model => model.Login, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Senha, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.Senha, new { htmlAttributes = new { @class = "form-control", @maxlength = "8" } })
+                    @Html.ValidationMessageFor(model => model.Senha, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ConfirmacaoSenha, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.ConfirmacaoSenha, new { htmlAttributes = new { @class = "form-control", @maxlength = "8" } })
+                    @Html.ValidationMessageFor(model => model.ConfirmacaoSenha, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <input type="submit" value="Cadastrar" class="btn btn-danger" />
+        </div>
+    </div>
+}
+@section scripts {
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}

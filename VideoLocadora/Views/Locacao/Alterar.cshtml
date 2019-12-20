@@ -1,0 +1,59 @@
+﻿@model Modelo.Locacao
+@{
+    ViewBag.Title = "Alterar Locação";
+}
+@using (Html.BeginForm("Alterar", "Locacao"))
+{
+    @Html.AntiForgeryToken()
+    <br /><br />
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4>Alterar Locação</h4>
+        </div>
+        <div class="panel-body">
+            <div hidden>
+                @Html.LabelFor(model => model.Id)
+                @Html.TextBoxFor(model => model.Id)
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    @Html.LabelFor(model => model.CPF, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.CPF, new { htmlAttributes = new { @class = "form-control", @maxlength = "14" } })
+                    @Html.ValidationMessageFor(model => model.CPF, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label for="DtaCriacao">Data de criação</label>
+                    @if (ViewBag.dtLocacao != null)
+                    {
+                        @Html.EditorFor(model => model.DtaLocacao, new { htmlAttributes = new { @class = "form-control" }, @Value = ViewBag.dtCriacao.ToString("yyyy-MM-dd") })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.DtaLocacao, new { htmlAttributes = new { @class = "form-control" } })
+                    }
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label>Filmes Locados</label>
+                </div>
+                <ul class="list-group">
+                    @foreach (var filme in ViewBag.Filmes)
+                    {
+                        <li class="list-group-item"><input type="checkbox" checked="checked" name="FilmeId" value="@filme.Id" style="float:left" /> @filme.Nome </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <input type="submit" value="Alterar" class="btn btn-danger">
+            <input type="submit" value="Voltar" class="btn btn-primary" onClick="javascript: history.back(-1);">
+        </div>
+    </div>
+}
+@section scripts {
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}
