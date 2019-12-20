@@ -6,12 +6,12 @@ Aplicação de Vídeo Locadora desenvolvida em ASP.NET MVC, Entity Framework, Da
 
 Visual Studio 2017, Banco de Dados SQL Server e Microsoft Azure.
 
-## Prerequisites
+## Instruções
 
-What things you need to install the software and how to install them
+O arquivo Web.config está configurado para a instância do LocalDB
 
 ```
-Give examples
+<add name="VideoLocadora" providerName="System.Data.SqlClient" connectionString="Data Source=(LocalDb)\MSSqlLocalDB;Initial Catalog=VideoLocadora;Integrated Security=True;"/>
 ```
 
 ### Installing
