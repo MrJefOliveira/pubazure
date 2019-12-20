@@ -8,7 +8,7 @@ Visual Studio 2017, Banco de Dados SQL Server e Microsoft Azure.
 
 ## Instruções
 
-O arquivo Web.config está configurada a connectionString para a instância do LocalDB
+No arquivo Web.config está configurado a connectionString do LocalDB
 
 ```
 <add name="VideoLocadora" providerName="System.Data.SqlClient" connectionString="Data Source=(LocalDb)\MSSqlLocalDB;Initial Catalog=VideoLocadora;Integrated Security=True;"/>
